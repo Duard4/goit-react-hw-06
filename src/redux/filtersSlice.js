@@ -12,8 +12,6 @@ const slice = createSlice({
 	},
 });
 
-// Експортуємо фабрики екшенів
 export const { changeFilter } = slice.actions;
-
-// Експортуємо редюсер слайсу
+export const selectFilter = (state) => state.filters.name;
 export default slice.reducer;

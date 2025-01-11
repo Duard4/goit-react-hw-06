@@ -1,6 +1,8 @@
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 import { useSelector } from "react-redux";
+import { selectContacts } from "../../redux/contactsSlice";
+import { selectFilter } from "../../redux/filtersSlice";
 
 const getVisibleContacts = (contacts, nameFilter) => {
 	return contacts.filter((contact) =>
@@ -8,16 +10,16 @@ const getVisibleContacts = (contacts, nameFilter) => {
 	);
 };
 
-const ContactList = ({ onDelete }) => {
-	const contacts = useSelector((state) => state.contacts.items);
-	const statusFilter = useSelector((state) => state.filters.name);
+const ContactList = () => {
+	const contacts = useSelector(selectContacts);
+	const statusFilter = useSelector(selectFilter);
 	const visibleContacts = getVisibleContacts(contacts, statusFilter);
 
 	return (
 		<ul className={css.contacList}>
 			{visibleContacts.map((contact) => (
 				<li key={contact.id}>
-					<Contact contact={contact} onDelete={onDelete}></Contact>
+					<Contact contact={contact}></Contact>
 				</li>
 			))}
 		</ul>
